@@ -16,12 +16,13 @@
     <style>
         /* CSS Custom Properties */
         :root {
+            
             --color-primary: #b85c4d;
             --color-primary-dark: #9a4a3d;
             --color-primary-light: #d4786a;
             --color-bg: #fafaf9;
             --color-surface: #ffffff;
-            --color-text: #1f2937;
+            --color-text: #37251f;
             --color-text-light: #6b7280;
             --color-border: #e5e7eb;
             --color-accent-bg: #fef5f3;
@@ -121,6 +122,7 @@
             z-index: 1000;
             transition: all 0.3s ease;
         }
+    
 
         .nav.scrolled {
             box-shadow: var(--shadow-md);
@@ -660,7 +662,7 @@
 
         /* Footer */
         .footer {
-            background: var(--color-text);
+            background: var(--color-text:);
             color: white;
             text-align: center;
             padding: var(--spacing-lg);
@@ -758,6 +760,59 @@
                 flex-direction: column;
             }
         }
+/* Elegant projects fix: Visible immediately, filters work perfectly */
+#projects {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    transition: none !important; /* Disable animation for projects */
+}
+
+#projects .project-card {
+    display: block !important; /* Default visible */
+}
+
+#projects .project-card.hidden {
+    display: none !important; /* JS filter hides */
+}
+
+/* Hero already visible, ensure it stays */
+#hero {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-lg);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: var(--color-primary-dark);
+    transform: translateY(-2px);
+}
+
+
+
+
     </style>
 </head>
 
@@ -778,7 +833,7 @@
             </button>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#hero" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
+                <!-- <li><a href="#about" class="nav-link">About</a></li> -->
                 <li><a href="#experience" class="nav-link">Experience</a></li>
                 <li><a href="#projects" class="nav-link">Projects</a></li>
                 <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -802,8 +857,7 @@
                             scratch, introduced company-wide UX benchmarks, delivered experiments generating 12%
                             conversion uplift, and shipped a GenAI conversational assistant all while leading
                             cross-functional teams across B2B SaaS, fintech, and high-traffic consumer platforms.</p>
-                        <p>I'm at my best in ambiguous problem spaces where nobody has the answer yet. Based in Malta,
-                            open to remote.</p>
+                        <p>I'm at my best in ambiguous problem spaces where nobody has the answer yet. Malta-based, open to remote. </p>
                     </div>
                 </div>
                 <div class="hero-image">
@@ -813,7 +867,7 @@
         </div>
     </section>
 
-    <!-- About Section -->
+    <!-- About Section
     <section id="about" class="about">
         <div class="container">
             <h2>About</h2>
@@ -825,7 +879,7 @@
                     researcher (UX Collective). TNW T500 Talent Under 25 (2017, 2018). PSM I Certified.</p>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Metrics Bar -->
     <section id="metrics" class="metrics">
@@ -833,23 +887,23 @@
             <div class="metrics-grid">
                 <div class="metric-item">
                     <span class="metric-number">2.5M+</span>
-                    <span class="metric-label">Monthly Active Users</span>
+                    <span class="metric-label">Monthly Active Users Impacted</span>
                 </div>
                 <div class="metric-item">
-                    <span class="metric-number">80+</span>
+                    <span class="metric-number">160+</span>
                     <span class="metric-label">User Interviews Conducted</span>
                 </div>
                 <div class="metric-item">
-                    <span class="metric-number">60+</span>
-                    <span class="metric-label">Research Activities Led</span>
+                    <span class="metric-number">3</span>
+                    <span class="metric-label">Research Repositories Built from Scratch</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">20+</span>
+                    <span class="metric-label">A/B Experiments Launched (12%↑ best)</span>
                 </div>
                 <div class="metric-item">
                     <span class="metric-number">10+</span>
                     <span class="metric-label">Global Markets</span>
-                </div>
-                <div class="metric-item">
-                    <span class="metric-number">~12%</span>
-                    <span class="metric-label">Conversion Uplift (Best Experiment)</span>
                 </div>
             </div>
         </div>
@@ -1566,6 +1620,13 @@
         </div>
     </footer>
 
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+    </button>
+    
+
     <script>
         // Navigation Scroll Effect
         const nav = document.getElementById('nav');
@@ -1655,6 +1716,27 @@
         // Make hero section visible immediately
         document.getElementById('hero').classList.add('visible');
 
+// Unified back-to-top: Logo + Button
+const backToTop = document.getElementById('backToTop');
+const navBrand = document.querySelector('.nav-brand');
+
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Nav brand click
+navBrand.addEventListener('click', scrollToTop);
+
+// Button scroll + show/hide
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 800) {
+        backToTop.classList.add('show');
+    } else {
+        backToTop.classList.remove('show');
+    }
+});
+
+backToTop.addEventListener('click', scrollToTop);
 
 
     </script>
