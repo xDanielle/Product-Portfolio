@@ -13,5 +13,5 @@ jobs:
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
           firebaseServiceAccount: "${{ secrets.FIREBASE_TOKEN }}"
-          projectId: portfolio-danielleduijsts  # Get from firebase projects:list
+          projectId: portfolio-danielleduijst  # Get from firebase projects:list
           channelId: live
