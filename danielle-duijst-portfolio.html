@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniëlle Duijst | Senior Product Manager</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* CSS Custom Properties */
+        :root {
+            --color-primary: #b85c4d;
+            --color-primary-dark: #9a4a3d;
+            --color-primary-light: #d4786a;
+            --color-bg: #fafaf9;
+            --color-surface: #ffffff;
+            --color-text: #1f2937;
+            --color-text-light: #6b7280;
+            --color-border: #e5e7eb;
+            --color-accent-bg: #fef5f3;
+
+            --font-heading: 'DM Sans', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 1.5rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 3rem;
+            --spacing-2xl: 4rem;
+            --spacing-3xl: 6rem;
+
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Typography */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-text);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--color-primary-dark);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav.scrolled {
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-lg);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* .nav-brand {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        } */
+
+        .nav-brand {
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand img {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-brand.scrolled img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .nav-brand .name-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-brand.scrolled .name-text {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+
+        .nav-menu {
+            display: flex;
+            gap: var(--spacing-lg);
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--color-text);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-xs);
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--color-text);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-lg);
+        }
+
+        section {
+            padding: var(--spacing-3xl) 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: calc(var(--spacing-3xl) + 60px);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--color-accent-bg) 0%, var(--color-bg) 100%);
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-2xl);
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .hero-bio {
+            font-size: 1.125rem;
+            color: var(--color-text-light);
+            line-height: 1.7;
+        }
+
+        .hero-image {
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            box-shadow: var(--shadow-lg);
+            border: 6px solid var(--color-surface);
+        }
+
+        /* About Section */
+        .about {
+            background: var(--color-surface);
+        }
+
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--color-text-light);
+        }
+
+        /* Metrics Bar */
+        .metrics {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-2xl) 0;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .metric-item {
+            text-align: center;
+        }
+
+        .metric-number {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: var(--spacing-xl);
+            padding-bottom: var(--spacing-2xl);
+            border-left: 2px solid var(--color-border);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            border-left-color: var(--color-primary);
+        }
+
+        .timeline-item:last-child {
+            padding-bottom: 0;
+            border-left-color: transparent;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -8px;
+            top: 4px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            border: 3px solid var(--color-surface);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .timeline-content h3 {
+            color: var(--color-primary);
+            font-size: 1.25rem;
+        }
+
+        .timeline-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-sm);
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+        }
+
+        .timeline-company {
+            font-weight: 600;
+        }
+
+        .timeline-bullets {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-bullets li {
+            position: relative;
+            padding-left: var(--spacing-md);
+            margin-bottom: var(--spacing-sm);
+            color: var(--color-text-light);
+        }
+
+        .timeline-bullets li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--color-surface);
+        }
+
+        .projects-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-2xl);
+            justify-content: center;
+        }
+
+        .filter-btn {
+            padding: var(--spacing-xs) var(--spacing-md);
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--color-text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            background: var(--color-accent-bg);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--color-primary);
+            border-color: var(--color-primary);
+            color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .project-card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--color-primary);
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-card.hidden {
+            display: none;
+        }
+
+        .project-content {
+            padding: var(--spacing-lg);
+        }
+
+        .project-company {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .project-summary {
+            font-size: 0.875rem;
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+        }
+
+        .project-description {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-md);
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-xs);
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: var(--color-accent-bg);
+            color: var(--color-primary);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Skills Section */
+        .skills-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skills-category {
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .skills-category h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .skills-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-tag {
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--color-accent-bg);
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Education Section */
+        .education {
+            background: var(--color-surface);
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-2xl);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .education-column h3 {
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .education-item {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .education-degree {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .education-school {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        .cert-item {
+            margin-bottom: var(--spacing-sm);
+            padding-left: var(--spacing-md);
+            position: relative;
+        }
+
+        .cert-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--color-primary);
+            font-weight: bold;
+        }
+
+        /* Awards Section */
+        .awards-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .award-item {
+            background: var(--color-surface);
+            padding: var(--spacing-lg);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+            border-left: 4px solid var(--color-primary);
+            transition: all 0.3s ease;
+        }
+
+        .award-item:hover {
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .award-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .award-details {
+            color: var(--color-text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact h2 {
+            color: white;
+        }
+
+        .contact-tagline {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-2xl);
+            opacity: 0.95;
+        }
+
+        .contact-links {
+            display: flex;
+            gap: var(--spacing-lg);
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md) var(--spacing-xl);
+            background: white;
+            color: var(--color-primary);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--color-accent-bg);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: white;
+            text-align: center;
+            padding: var(--spacing-lg);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .nav-menu {
+                position: fixed;
+                top: 60px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background: white;
+                padding: var(--spacing-lg);
+                box-shadow: var(--shadow-lg);
+                transition: left 0.3s ease;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-image img {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+
+            .hero-bio {
+                font-size: 1rem;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .metric-number {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                padding-left: var(--spacing-lg);
+            }
+
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: var(--spacing-2xl) 0;
+            }
+
+            .hero {
+                padding-top: calc(var(--spacing-2xl) + 60px);
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 var(--spacing-md);
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <!-- <div class="nav-brand">DD</div>-->
+            <div class="nav-brand" id="navBrand">
+                <img src="LogoDD.png" alt="DD Logo">
+                <span class="name-text">Daniëlle Duijst</span>
+            </div>
+            
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#hero" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Daniëlle Duijst</h1>
+                    <div class="hero-subtitle">Senior Product Manager | Research & Experimentation</div>
+                    <div class="hero-bio">
+                        <p>I started in UX design and front-end development, grew into research, and found my home
+                            leading product and experimentation. That journey means I think in user needs, speak in
+                            hypotheses, and ship in sprints.</p>
+                        <p>Over 7+ years I've conducted 160+ customer interviews, built research repositories from
+                            scratch, introduced company-wide UX benchmarks, delivered experiments generating 12%
+                            conversion uplift, and shipped a GenAI conversational assistant all while leading
+                            cross-functional teams across B2B SaaS, fintech, and high-traffic consumer platforms.</p>
+                        <p>I'm at my best in ambiguous problem spaces where nobody has the answer yet. Based in Malta,
+                            open to remote.</p>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="IMG-20190413-WA0021.jpg" alt="Daniëlle Duijst">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About</h2>
+            <div class="about-content">
+                <p>Hands-on operator who ships fast and measures real usage. Uses AI daily to accelerate prototyping and
+                    analysis. Experienced in leading cross-functional teams and driving user activation, engagement, and
+                    organic growth through workflow optimization and rapid A/B testing.</p>
+                <p>MSc in Information Studies (Human-Centered Multimedia) from University of Amsterdam. Published
+                    researcher (UX Collective). TNW T500 Talent Under 25 (2017, 2018). PSM I Certified.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metrics Bar -->
+    <section id="metrics" class="metrics">
+        <div class="container">
+            <div class="metrics-grid">
+                <div class="metric-item">
+                    <span class="metric-number">2.5M+</span>
+                    <span class="metric-label">Monthly Active Users</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">80+</span>
+                    <span class="metric-label">User Interviews Conducted</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">60+</span>
+                    <span class="metric-label">Research Activities Led</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">10+</span>
+                    <span class="metric-label">Global Markets</span>
+                </div>
+                <div class="metric-item">
+                    <span class="metric-number">~12%</span>
+                    <span class="metric-label">Conversion Uplift (Best Experiment)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2>Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Product Manager & UX Strategist</h3>
+                        <div class="timeline-meta">
+                            <span class="timeline-company">ClickOut Media</span>
+                            <span>•</span>
+                            <span>Aug 2024 – Present</span>
+                            <span>•</span>
+                            <span>Malta (Remote)</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Designed, launched, and analyzed A/B and multivariate tests end-to-end across 6+
+                                flagship sites and 3 verticals serving 2.5M MAU. Delivered 10+ experiments including one
+                                generating ~12% relative uplift in conversion.</li>
+                            <li>Led 2 development teams across 10+ global markets, partnering with engineering, design,
+                                SEO, and editorial. Built custom GA4 dashboards to measure product success.</li>
+                            <li>Used AI tools daily for rapid prototyping and experiment development. Shipped
+                                experiments within sprints using Figma, JS/CSS.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Strategic UX & Product Researcher</h3>
+                        <div class="timeline-meta">
+                            <span class="timeline-company">Covantis</span>
+                            <span>•</span>
+                            <span>Nov 2022 – Aug 2024</span>
+                            <span>•</span>
+                            <span>Malta (Remote)</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Led user research and product strategy for a B2B collaboration platform for complex
+                                shipping workflows. Conducted 80+ interviews across 7 markets and 6 user roles.</li>
+                            <li>Owned onboarding strategy for multi-user workflows. Introduced UMUX-Lite as standardized
+                                satisfaction benchmark. Built research repositories tracking satisfaction trends.</li>
+                            <li>Partnered with 3+ product teams ensuring research insights informed roadmap
+                                prioritization from discovery to delivery.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>UX Researcher (Quant & Qual)</h3>
+                        <div class="timeline-meta">
+                            <span class="timeline-company">BLEXR</span>
+                            <span>•</span>
+                            <span>May 2020 – Nov 2022</span>
+                            <span>•</span>
+                            <span>Malta (Hybrid)</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Led 60+ research activities including interviews, usability tests, surveys, and
+                                behavioral analysis across B2C products.</li>
+                            <li>Built a central research repository from scratch using Airtable, improving
+                                discoverability by 80%. Developed 6 data-driven personas.</li>
+                            <li>Reduced recruitment lead time by 25% and scaled user panel from 0 to 100+ participants.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>UX Designer, Researcher & Front-End Developer</h3>
+                        <div class="timeline-meta">
+                            <span class="timeline-company">ABN AMRO (via Navara, Capgemini)</span>
+                            <span>•</span>
+                            <span>Mar 2018 – Apr 2020</span>
+                            <span>•</span>
+                            <span>Amsterdam</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Led UX research and design for 3+ internal applications. Conducted usability testing
+                                with 30+ employees. Delivered 20+ responsive front-end components.</li>
+                            <li>Facilitated 2 Design Thinking workshops with 10+ participants. Created 5+ high-fidelity
+                                prototypes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <h3>Early Career & Foundations</h3>
+                        <div class="timeline-meta">
+                            <span class="timeline-company">Various</span>
+                            <span>•</span>
+                            <span>2014 – 2018</span>
+                            <span>•</span>
+                            <span>Netherlands</span>
+                        </div>
+                        <ul class="timeline-bullets">
+                            <li>Roles at Capgemini, ETPA, Blue Harvest, Tipico, Bright Alley, Social Brothers, Utrecht
+                                University. Built foundation in UX research, analytics, product thinking, and
+                                engineering across finance, tech, media, and education.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2>Projects</h2>
+
+            <div class="projects-filters">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="experimentation">Experimentation</button>
+                <button class="filter-btn" data-filter="research">UX Research</button>
+                <button class="filter-btn" data-filter="ops">Research Ops</button>
+                <button class="filter-btn" data-filter="design">UX Design</button>
+                <button class="filter-btn" data-filter="product">Product Strategy</button>
+                <button class="filter-btn" data-filter="ai">AI/GenAI</button>
+            </div>
+
+            <div class="projects-grid">
+                <!-- ClickOut Media Projects -->
+                <div class="project-card" data-tags="experimentation,product">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>High-Velocity Experimentation Programme</h3>
+                        <p class="project-summary">Owned the full experimentation cycle across 6 flagship sites serving
+                            2.5M MAU — from hypothesis to analysis.</p>
+                        <p class="project-description">Designed, built, and analysed A/B and multivariate tests
+                            end-to-end across 3 verticals. Implemented custom JS/CSS experiments for exit popups and
+                            dynamic conversion flows. Delivered 10+ experiments including one generating a 12% relative
+                            uplift in clickout conversion.</p>
+                        <div class="project-tags">
+                            <span class="tag">A/B Testing</span>
+                            <span class="tag">CRO</span>
+                            <span class="tag">VWO</span>
+                            <span class="tag">JavaScript/CSS</span>
+                            <span class="tag">Multivariate Testing</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="experimentation,ops">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>A/B Testing Process & Governance Framework</h3>
+                        <p class="project-summary">Built the company-wide experimentation framework — playbooks,
+                            templates, guardrails, and PM training on VWO.</p>
+                        <p class="project-description">Created an end-to-end experiment process covering ideation,
+                            hypothesis framing, test setup, QA, monitoring, evaluation, and knowledge sharing.
+                            Established statistical rigor guardrails and test collision prevention. Trained Product
+                            Managers on VWO and promoted a shared test-and-learn culture across teams.</p>
+                        <div class="project-tags">
+                            <span class="tag">Experimentation Governance</span>
+                            <span class="tag">Process Design</span>
+                            <span class="tag">Playbooks</span>
+                            <span class="tag">Training</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>99Bitcoins Product Development</h3>
+                        <p class="project-summary">Led product development for 99Bitcoins, shipping interactive courses,
+                            data widgets, and a new shortcode system.</p>
+                        <p class="project-description">Shipped 3 major product releases (v1.5.6 → v1.6.3): interactive
+                            Learn Crypto courses with modules and quizzes, Coin Table V3 with custom CoinGecko
+                            categories, Bitcoin Hashrate & Gas Fee trackers, Bitcoin Dominance Pro, Fear & Greed
+                            indicator updates, and an automatic Deadcoins solution.</p>
+                        <div class="project-tags">
+                            <span class="tag">Product Management</span>
+                            <span class="tag">Crypto</span>
+                            <span class="tag">Data Platform</span>
+                            <span class="tag">WordPress</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product,experimentation">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>Cryptonews Discovery & Product Backlog</h3>
+                        <p class="project-summary">Managed the product discovery backlog for Cryptonews — prioritising
+                            ideas from stakeholders and running A/B tests.</p>
+                        <p class="project-description">Collected and prioritised ideas across landing page redesigns,
+                            live articles, interlinking widgets, email subscription flows, price trackers, sortable
+                            tables, and an Academy learning hub. Ran A/B tests on sortable tables and CTA variations.
+                            Proposed innovations including AI-Powered Sentiment Analysis and Crypto Glossary.</p>
+                        <div class="project-tags">
+                            <span class="tag">Product Discovery</span>
+                            <span class="tag">Backlog Management</span>
+                            <span class="tag">Innovation</span>
+                            <span class="tag">VWO</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>Data Aggregator — Crypto Vertical</h3>
+                        <p class="project-summary">Designed a centralised data layer replacing fragmented API calls
+                            across crypto sites — powering all data widgets at scale.</p>
+                        <p class="project-description">Shipped a shared Data Aggregator that now powers coin tables,
+                            price charts, Fear & Greed widgets, and more. Reduced API calls and rate limit risks,
+                            improved cache reuse, ensured consistent UX, and enabled fallback-ready multi-API support.
+                            Future-proofed data infrastructure for faster widget development.</p>
+                        <div class="project-tags">
+                            <span class="tag">Product Architecture</span>
+                            <span class="tag">API Strategy</span>
+                            <span class="tag">Data Infrastructure</span>
+                            <span class="tag">Multi-Site</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="ai,product">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>GenAI Conversational Assistant for End Users</h3>
+                        <p class="project-summary">Led delivery of a GenAI conversational assistant for contextual
+                            content discovery and personalised offers.</p>
+                        <p class="project-description">Led delivery of a GenAI conversational assistant using N8N + LLM
+                            integration for contextual content discovery. Managed requirements and technical
+                            implementation with the Head of Automation, delivering a production-ready prototype with
+                            real-time data retrieval to surface personalised offers to end users.</p>
+                        <div class="project-tags">
+                            <span class="tag">GenAI</span>
+                            <span class="tag">N8N</span>
+                            <span class="tag">LLM</span>
+                            <span class="tag">Personalisation</span>
+                            <span class="tag">Product Delivery</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>Quant UX Research — Clickout Media</h3>
+                        <p class="project-summary">Owned end-to-end discovery for high-traffic SEO-driven platforms
+                            using mixed-methods research and post-launch validation.</p>
+                        <p class="project-description">Framed ambiguous stakeholder questions into testable research
+                            hypotheses and decision boundaries. Combined qualitative insights with GA4 behavioural data
+                            and session recordings to identify friction points. Used A/B testing and behavioural signals
+                            to validate insights post-launch and inform iteration.</p>
+                        <div class="project-tags">
+                            <span class="tag">Mixed Methods</span>
+                            <span class="tag">Behavioural Analytics</span>
+                            <span class="tag">Surveys</span>
+                            <span class="tag">Session Recordings</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product">
+                    <div class="project-content">
+                        <span class="project-company">ClickOut Media</span>
+                        <h3>Data-Driven UX Dashboards</h3>
+                        <p class="project-summary">Built custom GA4 dashboards to measure product success, track
+                            behaviour, and surface optimisation opportunities across 6 platforms.</p>
+                        <p class="project-description">Built custom dashboards and reports in GA4 to measure product
+                            KPIs, track user behaviour, and guide cross-functional decisions. Combined qualitative
+                            insights with quantitative signals to identify friction points and prioritise optimisation
+                            opportunities across 6 flagship sites.</p>
+                        <div class="project-tags">
+                            <span class="tag">GA4</span>
+                            <span class="tag">Looker Studio</span>
+                            <span class="tag">Product Analytics</span>
+                            <span class="tag">Dashboards</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Covantis Projects -->
+                <div class="project-card" data-tags="ops,research">
+                    <div class="project-content">
+                        <span class="project-company">Covantis</span>
+                        <h3>Research Operations & Knowledge Base</h3>
+                        <p class="project-summary">Built a reusable research knowledge base and synthesised 100+
+                            insights into 15 foundational themes using Opportunity Solution Trees.</p>
+                        <p class="project-description">Established a reusable research knowledge base to prevent
+                            repeated discovery, improve insight reuse, and ensure continuity between discovery,
+                            delivery, and validation. Synthesised qualitative findings into Opportunity Solution Trees,
+                            clustering 100+ insights into 15 foundational themes used to support build/adapt/kill
+                            decisions tied to OKRs.</p>
+                        <div class="project-tags">
+                            <span class="tag">Research Ops</span>
+                            <span class="tag">Opportunity Solution Trees</span>
+                            <span class="tag">Knowledge Reuse</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product">
+                    <div class="project-content">
+                        <span class="project-company">Covantis</span>
+                        <h3>Gamification for B2B Products — Octalysis Framework</h3>
+                        <p class="project-summary">Presented the Octalysis gamification framework at an internal UX Jam,
+                            exploring how gamification principles apply to B2B products.</p>
+                        <p class="project-description">Delivered a knowledge-sharing presentation at an internal UX Jam
+                            session, introducing the Octalysis framework and exploring how gamification principles can
+                            be applied to complex B2B enterprise products to drive engagement and workflow adoption.</p>
+                        <div class="project-tags">
+                            <span class="tag">Gamification</span>
+                            <span class="tag">Octalysis</span>
+                            <span class="tag">Knowledge Sharing</span>
+                            <span class="tag">B2B SaaS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research,product">
+                    <div class="project-content">
+                        <span class="project-company">Covantis</span>
+                        <h3>UX Benchmark (UMUX-Lite) for Shareholders</h3>
+                        <p class="project-summary">Introduced UMUX-Lite as the company-wide UX benchmark, replacing
+                            inconsistent NPS and presenting results to shareholders.</p>
+                        <p class="project-description">Introduced UMUX-Lite as the standardised benchmark for customer
+                            satisfaction and perceived usefulness, replacing inconsistent NPS usage. Defined the
+                            framework, pitched it to stakeholders, drove company-wide adoption, and presented results to
+                            shareholders as the reporting standard for user satisfaction.</p>
+                        <div class="project-tags">
+                            <span class="tag">UMUX-Lite</span>
+                            <span class="tag">UX Benchmark</span>
+                            <span class="tag">Stakeholder Reporting</span>
+                            <span class="tag">Satisfaction Metrics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="ai,research,ops">
+                    <div class="project-content">
+                        <span class="project-company">Covantis</span>
+                        <h3>Internal AI Research Assistant</h3>
+                        <p class="project-summary">Built an AI agent powered by OpenAI that lets anyone — PMs,
+                            developers, account managers — query research findings by client or topic.</p>
+                        <p class="project-description">Co-built an AI agent (OpenAI) as part of an innovation initiative
+                            that pulls from the research repository to answer natural language questions — e.g. "What
+                            are Agrotrade's biggest UX problems?" or "What is the most common pain point with our
+                            system?" Designed to make research accessible to developers, PMs, account managers, and
+                            commercial teams working with enterprise clients.</p>
+                        <div class="project-tags">
+                            <span class="tag">AI Agent</span>
+                            <span class="tag">OpenAI</span>
+                            <span class="tag">Research Democratisation</span>
+                            <span class="tag">Internal Tool</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research">
+                    <div class="project-content">
+                        <span class="project-company">Covantis</span>
+                        <h3>Enterprise UX Research</h3>
+                        <p class="project-summary">Led 7 large-scale research initiatives across 7 global B2B markets,
+                            conducting 80 enterprise interviews to inform roadmap decisions.</p>
+                        <p class="project-description">Mapped end-to-end workflows for 6 distinct user groups (shippers,
+                            buyers, operators) across 7 markets. Conducted 80 in-depth interviews to surface workflow
+                            gaps, directly informing roadmap decisions including the CircleOut document resolution tool
+                            and OCR/AI scanning requirements for document automation. Reached 90% confidence in
+                            validated workflows.</p>
+                        <div class="project-tags">
+                            <span class="tag">Enterprise Research</span>
+                            <span class="tag">IDIs</span>
+                            <span class="tag">Multi-Market</span>
+                            <span class="tag">Workflow Mapping</span>
+                            <span class="tag">OCR/AI</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLEXR Projects -->
+                <div class="project-card" data-tags="ops,research">
+                    <div class="project-content">
+                        <span class="project-company">BLEXR</span>
+                        <h3>Research Operations & Repository</h3>
+                        <p class="project-summary">Built a central research repository from scratch using Airtable,
+                            improving research accessibility by 80%.</p>
+                        <p class="project-description">Built and operationalised a central research repository from
+                            scratch using Airtable. Improved documentation, discoverability, and insight reuse across
+                            product, design, and delivery teams — achieving 80% improvement in research accessibility
+                            and significantly reducing duplicated discovery work.</p>
+                        <div class="project-tags">
+                            <span class="tag">Research Ops</span>
+                            <span class="tag">Airtable</span>
+                            <span class="tag">Insight Repository</span>
+                            <span class="tag">Process Design</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research">
+                    <div class="project-content">
+                        <span class="project-company">BLEXR</span>
+                        <h3>Data-Driven User Personas</h3>
+                        <p class="project-summary">Developed 6 data-informed personas by triangulating qualitative
+                            insights with quantitative behavioural data.</p>
+                        <p class="project-description">Created 6 detailed personas by triangulating interview and
+                            usability test insights with quantitative behavioural data. Used for segmentation, targeted
+                            product decisions, and evidence-based prioritisation across product teams.</p>
+                        <div class="project-tags">
+                            <span class="tag">Personas</span>
+                            <span class="tag">Segmentation</span>
+                            <span class="tag">Mixed Methods</span>
+                            <span class="tag">Behavioural Data</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="ops,research">
+                    <div class="project-content">
+                        <span class="project-company">BLEXR</span>
+                        <h3>UX Research Recruitment & Panel Building</h3>
+                        <p class="project-summary">Redesigned the UX research recruitment flow, reducing lead time by
+                            25% and growing the user panel from 0 to 100.</p>
+                        <p class="project-description">Redesigned the research recruitment workflow to reduce lead time
+                            by 25%, enabling faster insight cycles. Built the user research panel from zero to 100
+                            participants and growing, supporting ongoing usability testing, interviews, and
+                            experimentation across B2C products.</p>
+                        <div class="project-tags">
+                            <span class="tag">Research Ops</span>
+                            <span class="tag">Recruitment</span>
+                            <span class="tag">User Panel</span>
+                            <span class="tag">Process Optimisation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research">
+                    <div class="project-content">
+                        <span class="project-company">BLEXR</span>
+                        <h3>Hands-on UX Research</h3>
+                        <p class="project-summary">Led 60+ research activities — interviews, usability tests, surveys,
+                            and behavioural analysis — collecting 300+ unique feedback items.</p>
+                        <p class="project-description">Led 60+ research activities including interviews, usability
+                            tests, surveys, and behavioural analysis across B2C digital products. Conducted 100+
+                            sessions and collected 300+ unique feedback items. Structured outputs to support hypothesis
+                            framing and ensure findings translated into testable ideas.</p>
+                        <div class="project-tags">
+                            <span class="tag">UX Research</span>
+                            <span class="tag">Usability Testing</span>
+                            <span class="tag">Interviews</span>
+                            <span class="tag">Surveys</span>
+                            <span class="tag">B2C</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABN AMRO Projects -->
+                <div class="project-card" data-tags="research,product,design">
+                    <div class="project-content">
+                        <span class="project-company">ABN AMRO</span>
+                        <h3>Piket App (On-Call App)</h3>
+                        <p class="project-summary">Led UX research and design for the Piket on-call scheduling app for
+                            ABN AMRO employees.</p>
+                        <p class="project-description">Led UX research and design for Piket, an internal on-call
+                            scheduling application for ABN AMRO employees. Conducted usability testing, created
+                            prototypes, and delivered components aligned with the corporate design system.</p>
+                        <div class="project-tags">
+                            <span class="tag">UX Research</span>
+                            <span class="tag">UX Design</span>
+                            <span class="tag">Internal Tools</span>
+                            <span class="tag">Agile</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research,product,design">
+                    <div class="project-content">
+                        <span class="project-company">ABN AMRO</span>
+                        <h3>Warm Welkom App</h3>
+                        <p class="project-summary">Designed the Warm Welkom App for ABN AMRO bank branches — a full case
+                            study with interactive Figma prototype.</p>
+                        <p class="project-description">Led research and design for the Warm Welkom App, improving the
+                            welcome and onboarding experience at ABN AMRO bank branches. <a
+                                href="https://www.figma.com/proto/NuI481skBEYTp9MSnaZ45L/UX-Portfolio?node-id=180-511&t=B3EpXsbA0JScmPLL-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=180%3A511"
+                                target="_blank">View case study →</a></p>
+                        <div class="project-tags">
+                            <span class="tag">UX Design</span>
+                            <span class="tag">UX Research</span>
+                            <span class="tag">Bank Branches</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="research,product,design">
+                    <div class="project-content">
+                        <span class="project-company">ABN AMRO</span>
+                        <h3>Sustainability App</h3>
+                        <p class="project-summary">Led UX research and design for ABN AMRO's internal Sustainability App
+                            — with interactive Figma prototype.</p>
+                        <p class="project-description">Led UX research and design for ABN AMRO's internal Sustainability
+                            App. Conducted concept and usability testing with 30+ employees, facilitated Design Thinking
+                            workshops, and created high-fidelity prototypes. <a
+                                href="https://www.figma.com/proto/NuI481skBEYTp9MSnaZ45L/UX-Portfolio?node-id=180-2&t=fNM9wWTapMfW48pz-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=180%3A2"
+                                target="_blank">View case study →</a></p>
+                        <div class="project-tags">
+                            <span class="tag">UX Research</span>
+                            <span class="tag">UX Design</span>
+                            <span class="tag">Sustainability</span>
+                            <span class="tag">Internal Tools</span>
+                            <span class="tag">Figma</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Publications & Early Career -->
+                <div class="project-card" data-tags="research,ai">
+                    <div class="project-content">
+                        <span class="project-company">Publication</span>
+                        <h3>UX of Chatbot Personalisation</h3>
+                        <p class="project-summary">Published article on UX Collective exploring how personalisation
+                            affects chatbot user experience.</p>
+                        <p class="project-description">Published research article on UX Collective (2020) based on MSc
+                            research at the University of Amsterdam. Explores how personalisation affects the user
+                            experience of chatbots — demonstrating expertise in conversational UX, research methodology,
+                            and thought leadership. <a
+                                href="https://www.researchgate.net/publication/318404775_Can_we_Improve_the_User_Experience_of_Chatbots_with_Personalisation"
+                                target="_blank">Read article →</a></p>
+                        <div class="project-tags">
+                            <span class="tag">Publication</span>
+                            <span class="tag">UX Collective</span>
+                            <span class="tag">Chatbots</span>
+                            <span class="tag">Personalisation</span>
+                            <span class="tag">MSc Research</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card" data-tags="product">
+                    <div class="project-content">
+                        <span class="project-company">Blue Harvest</span>
+                        <h3>Scaleup Qualification MVP</h3>
+                        <p class="project-summary">Identified 10 UX improvements for a fintech MVP that helped startups
+                            qualify for Scaleup Certification.</p>
+                        <p class="project-description">Identified 10 UX improvement opportunities for a fintech MVP at
+                            Blue Harvest (via Capgemini) designed to intake startups for Scaleup Certification.
+                            Collaborated with an international team of 5 across 2 time zones. Built 10 reusable Angular
+                            components through self-study.</p>
+                        <div class="project-tags">
+                            <span class="tag">UX Development</span>
+                            <span class="tag">Fintech MVP</span>
+                            <span class="tag">Angular</span>
+                            <span class="tag">Capgemini</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2>Skills & Tools</h2>
+            <div class="skills-content">
+                <div class="skills-category">
+                    <h3>Growth & Experimentation</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">A/B Testing</span>
+                        <span class="skill-tag">Multivariate Testing</span>
+                        <span class="skill-tag">CRO</span>
+                        <span class="skill-tag">High-Velocity Experimentation</span>
+                        <span class="skill-tag">Hypothesis-Driven Development</span>
+                        <span class="skill-tag">Growth Roadmaps</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Product Analytics</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">Behavioral Analytics</span>
+                        <span class="skill-tag">Cohort Analysis</span>
+                        <span class="skill-tag">GA4</span>
+                        <span class="skill-tag">GTM</span>
+                        <span class="skill-tag">Looker Studio</span>
+                        <span class="skill-tag">Hotjar</span>
+                        <span class="skill-tag">Funnel Optimization</span>
+                        <span class="skill-tag">Journey Mapping</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Product Strategy</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">User Activation & Growth</span>
+                        <span class="skill-tag">Cross-Functional Leadership</span>
+                        <span class="skill-tag">Agile Product Ownership (PSM I)</span>
+                        <span class="skill-tag">Evidence-Based Decision-Making</span>
+                        <span class="skill-tag">AI-Accelerated Prototyping</span>
+                    </div>
+                </div>
+
+                <div class="skills-category">
+                    <h3>Tools</h3>
+                    <div class="skills-tags">
+                        <span class="skill-tag">VWO</span>
+                        <span class="skill-tag">Optimizely</span>
+                        <span class="skill-tag">GA4</span>
+                        <span class="skill-tag">GTM</span>
+                        <span class="skill-tag">Looker Studio</span>
+                        <span class="skill-tag">Hotjar</span>
+                        <span class="skill-tag">Jira</span>
+                        <span class="skill-tag">Confluence</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Airtable</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="education">
+        <div class="container">
+            <h2>Education & Certifications</h2>
+            <div class="education-grid">
+                <div class="education-column">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <div class="education-degree">MSc Information Studies</div>
+                        <div class="education-school">Human-Centered Multimedia<br>University of Amsterdam<br>2016–2017
+                        </div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-degree">Minor Digital Design & Psychology</div>
+                        <div class="education-school">University of Malta<br>2014–2015</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="education-degree">BSc Information Studies</div>
+                        <div class="education-school">Utrecht University<br>2012–2016</div>
+                    </div>
+                </div>
+
+                <div class="education-column">
+                    <h3>Certifications</h3>
+                    <div class="cert-item">Professional Scrum Master I (Scrum.org)</div>
+                    <div class="cert-item">Opportunity Mapping (Product Talk)</div>
+                    <div class="cert-item">User Research Methods (IDF)</div>
+                    <div class="cert-item">UX Management: Strategy & Tactics (IDF)</div>
+                    <div class="cert-item">Fundamentals of Digital Marketing (Google)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="awards">
+        <div class="container">
+            <h2>Awards & Publications</h2>
+            <div class="awards-content">
+                <div class="award-item">
+                    <div class="award-title">TNW T500 Talent Under 25</div>
+                    <div class="award-details">Recognized in 2017 and 2018 by The Next Web for outstanding achievements
+                        in technology and innovation.</div>
+                </div>
+                <div class="award-item">
+                    <div class="award-title">"What is the effect of personalisation on the UX of chatbots?"</div>
+                    <div class="award-details">Published on UX Collective, 2020 — 36,000+ reads on ResearchGate. <a
+                            href="https://www.researchgate.net/publication/318404775_Can_we_Improve_the_User_Experience_of_Chatbots_with_Personalisation"
+                            target="_blank">Read article →</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Connect</h2>
+            <p class="contact-tagline">Let's talk about your next experiment.</p>
+            <div class="contact-links">
+                <a href="mailto:danielleduijst@gmail.com" class="contact-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/danielleduijst/" target="_blank" class="contact-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                    LinkedIn
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Daniëlle Duijst. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navigation Scroll Effect
+        const nav = document.getElementById('nav');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Navigation Toggle
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 70;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Project Filtering
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                projectCards.forEach(card => {
+                    if (filterValue === 'all') {
+                        card.classList.remove('hidden');
+                    } else {
+                        const tags = card.getAttribute('data-tags');
+                        if (tags && tags.includes(filterValue)) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+
+        // Make hero section visible immediately
+        document.getElementById('hero').classList.add('visible');
+
+
+
+    </script>
+</body>
+
+</html>
